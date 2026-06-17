@@ -95,3 +95,4 @@ C:\Cursos\CSharp\Projeto\ProjetoBiblioteca\obj\Debug\net10.0\refint\ProjetoBibli
 C:\Cursos\CSharp\Projeto\ProjetoBiblioteca\obj\Debug\net10.0\ProjetoBiblioteca.pdb
 C:\Cursos\CSharp\Projeto\ProjetoBiblioteca\obj\Debug\net10.0\ProjetoBiblioteca.genruntimeconfig.cache
 C:\Cursos\CSharp\Projeto\ProjetoBiblioteca\obj\Debug\net10.0\ref\ProjetoBiblioteca.dll
+C:\Cursos\CSharp\Projeto\ProjetoBiblioteca\obj\Debug\net10.0\ProjetoBiblioteca.sourcelink.json
