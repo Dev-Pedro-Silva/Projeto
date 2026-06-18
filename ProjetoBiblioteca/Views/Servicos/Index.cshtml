@@ -1,0 +1,21 @@
+@model List<ProjetoBiblioteca.Models.Servico>
+
+<h1>Serviços da Biblioteca</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var servico in Model)
+        {
+            <tr>
+                <td>@servico.Nome</td>
+                <td>@servico.Descricao</td>
+            </tr>
+        }
+    </tbody>
+</table>
