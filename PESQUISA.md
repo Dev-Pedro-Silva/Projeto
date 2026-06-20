@@ -29,4 +29,8 @@ A injeção de dependência permite entregar para uma classe todos os objetos qu
     - Integração simples com pequenos projetos
   Por outro lado, o SQLite tem limitações quando vários usuátrios tentar gravar informações simultâneamente. Em sistemas maiores pode causar lentidão.
   A medida que a aplicação crescer, é recomendável migrar para bancos mais robustos, que oferecem maios desempenho e escalabidade.
+
+> **Considerações Finais**
+
+As tecnologias mencionadas deixam o projeto mais organizado e mais rápido. A Injeção de Dependência facilita a manutenção, o Entity Framework deixa o acesso ao banco mais simples e o SQLite atende bem sistemas menores, podendo realizar diversos testes durante desenvolvimento.
   
