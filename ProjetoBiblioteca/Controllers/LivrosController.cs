@@ -1,33 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjetoBiblioteca.Data;
 using ProjetoBiblioteca.Models;
 
 namespace ProjetoBiblioteca.Controllers
 {
     public class LivrosController : Controller
     {
-        public IActionResult Index()
-        {
-            var livros = new List<Livro>
-            {
-                new Livro
-                {
-                    Id = 1,
-                    Titulo = "Teste 1",
-                    Autor = "Pedro",
-                    Categoria = "Teste",
-                    Preco = 89.90m
-                },
-                new Livro
-                {
-                    Id = 2,
-                    Titulo = "Teste 2",
-                    Autor = "Henrique",
-                    Categoria = "Teste",
-                    Preco = 59.90m
-                }
-            };
+        private readonly ApplicationDbContext _context;
 
-            return View(livros);
+        public LivrosController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // Lista todos os livros
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Livros.ToListAsync());
         }
     }
 }
