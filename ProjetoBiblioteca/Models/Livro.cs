@@ -1,15 +1,21 @@
-namespace ProjetoBiblioteca.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class Livro
+namespace ProjetoBiblioteca.Models
 {
-    public int Id { get; set; }
+    public class Livro
+    {
+        public int Id { get; set; }
 
-        public string Titulo { get; set; }
+        [Required(ErrorMessage = "O título é obrigatório.")]
+        public string Titulo { get; set; } = string.Empty;
 
-        public string Autor { get; set; }
+        [Required(ErrorMessage = "O autor é obrigatório.")]
+        public string Autor { get; set; } = string.Empty;
 
-        public string Categoria { get; set; }
+        [Required(ErrorMessage = "A categoria é obrigatória.")]
+        public string Categoria { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "O preço é obrigatório.")]
         public decimal Preco { get; set; }
-        
+    }
 }
