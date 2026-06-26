@@ -14,10 +14,31 @@ namespace ProjetoBiblioteca.Controllers
             _context = context;
         }
 
-        // Lista todos os livros
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Livros.ToListAsync());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Livro livro)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(livro);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(livro);
         }
     }
 }
