@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "Painel Administrativo";
+}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Painel Administrativo
+    </h1>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3>📚 Livros</h3>
+
+                    <p>
+                        Gerencie o catálogo da biblioteca.
+                    </p>
+
+                    <a asp-controller="Livros"
+                       asp-action="Index"
+                       class="btn btn-primary">
+
+                        Gerenciar Livros
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h3>🛠 Serviços</h3>
+
+                    <p>
+                        Gerencie os serviços oferecidos.
+                    </p>
+
+                    <a asp-controller="Servicos"
+                       asp-action="Index"
+                       class="btn btn-success">
+
+                        Gerenciar Serviços
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
