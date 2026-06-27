@@ -3,7 +3,6 @@ using ProjetoBiblioteca.Data;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");;
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=biblionuvem.db"));
@@ -15,9 +14,7 @@ builder.Services
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -46,5 +43,12 @@ app.MapControllerRoute(
     .WithStaticAssets();
     
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    await SeedData.CriarAdministrador(services);
+}
 
 app.Run();
