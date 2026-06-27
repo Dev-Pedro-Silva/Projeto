@@ -1,29 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Models;
+using ProjetoBiblioteca.Data;
+
 
 namespace ProjetoBiblioteca.Controllers
 {
     public class ServicosController : Controller
     {
-        public IActionResult Index()
-        {
-            var servicos = new List<Servico>
-            {
-                new Servico
-                {
-                    Id = 1,
-                    Nome = "Empréstimo de Livros",
-                    Descricao = "Empréstimo por até 15 dias."
-                },
-                new Servico
-                {
-                    Id = 2,
-                    Nome = "Reserva de Livros",
-                    Descricao = "Reserva online do acervo."
-                }
-            };
+        
+        private readonly ApplicationDbContext _context;
 
-            return View(servicos);
+        public ServicosController(ApplicationDbContext context)
+        {
+            _context = context;
         }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Servicos.ToListAsync());
+        }
+
     }
 }
