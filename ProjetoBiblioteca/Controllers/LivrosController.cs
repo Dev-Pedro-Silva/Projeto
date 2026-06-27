@@ -77,5 +77,37 @@ namespace ProjetoBiblioteca.Controllers
 
             return View(livro);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == id);
+
+            if (livro == null)
+            {
+                return NotFound();
+            }
+
+            return View(livro);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var livro = await _context.Livros.FindAsync(id);
+
+            if (livro != null)
+            {
+                _context.Livros.Remove(livro);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
