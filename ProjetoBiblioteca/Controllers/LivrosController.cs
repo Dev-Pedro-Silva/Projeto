@@ -40,5 +40,42 @@ namespace ProjetoBiblioteca.Controllers
 
             return View(livro);
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var livro = await _context.Livros.FindAsync(id);
+
+            if (livro == null)
+            {
+                return NotFound();
+            }
+
+            return View(livro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Livro livro)
+        {
+            if (id != livro.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(livro);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(livro);
+        }
     }
 }
