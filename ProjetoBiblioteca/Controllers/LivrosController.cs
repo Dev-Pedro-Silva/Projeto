@@ -15,9 +15,20 @@ namespace ProjetoBiblioteca.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string pesquisa)
         {
-            return View(await _context.Livros.ToListAsync());
+            var livros = from l in _context.Livros
+                         select l;
+
+            if (!string.IsNullOrWhiteSpace(pesquisa))
+            {
+                livros = livros.Where(l =>
+                    l.Titulo.Contains(pesquisa) ||
+                    l.Autor.Contains(pesquisa) ||
+                    l.Categoria.Contains(pesquisa));
+            }
+
+            return View(await livros.ToListAsync());
         }
 
         public IActionResult Create()

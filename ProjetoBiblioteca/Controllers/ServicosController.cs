@@ -15,9 +15,21 @@ namespace ProjetoBiblioteca.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+                
+        public async Task<IActionResult> Index(string pesquisa)
         {
-            return View(await _context.Servicos.ToListAsync());
+            var servicos = from s in _context.Servicos
+                         select s;
+
+            if (!string.IsNullOrWhiteSpace(pesquisa))
+            {
+                servicos = servicos.Where(l =>
+                    l.Nome.Contains(pesquisa) ||
+                    l.Descricao.Contains(pesquisa) ||
+                    l.Categoria.Contains(pesquisa));
+            }
+
+            return View(await servicos.ToListAsync());
         }
 
         public IActionResult Create()
@@ -77,7 +89,7 @@ namespace ProjetoBiblioteca.Controllers
 
             return View(servico);
         }
-        
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
