@@ -4,22 +4,26 @@
 
 <div class="container mt-5">
 
-    <h1 class="mb-4">
+    <h2 class="mb-4">
         Painel Administrativo
-    </h1>
+    </h2>
+
+    <div class="alert alert-success">
+        Bem-vindo à área administrativa da Biblioteca!
+    </div>
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
 
             <div class="card shadow">
 
                 <div class="card-body">
 
-                    <h3>📚 Livros</h3>
+                    <h4>📚 Livros</h4>
 
                     <p>
-                        Gerencie o catálogo da biblioteca.
+                        Gerencie os livros cadastrados.
                     </p>
 
                     <a asp-controller="Livros"
@@ -36,21 +40,21 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
 
             <div class="card shadow">
 
                 <div class="card-body">
 
-                    <h3>🛠 Serviços</h3>
+                    <h4>🛠 Serviços</h4>
 
                     <p>
-                        Gerencie os serviços oferecidos.
+                        Gerencie os serviços cadastrados.
                     </p>
 
                     <a asp-controller="Servicos"
                        asp-action="Index"
-                       class="btn btn-success">
+                       class="btn btn-primary">
 
                         Gerenciar Serviços
 

@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Data;
 using ProjetoBiblioteca.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjetoBiblioteca.Controllers
 {
+    [Authorize]
     public class LivrosController : Controller
     {
         private readonly ApplicationDbContext _context;

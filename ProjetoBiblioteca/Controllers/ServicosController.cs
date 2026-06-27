@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Models;
 using ProjetoBiblioteca.Data;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace ProjetoBiblioteca.Controllers
 {
+    [Authorize]
     public class ServicosController : Controller
     {
 
@@ -15,7 +17,7 @@ namespace ProjetoBiblioteca.Controllers
         {
             _context = context;
         }
-                
+
         public async Task<IActionResult> Index(string pesquisa)
         {
             var servicos = from s in _context.Servicos
