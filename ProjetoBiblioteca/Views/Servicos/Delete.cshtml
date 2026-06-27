@@ -1,0 +1,41 @@
+@model ProjetoBiblioteca.Models.Servico
+
+@{
+    ViewData["Title"] = "Excluir Serviço";
+}
+
+<h2>Excluir Serviço</h2>
+
+<div class="alert alert-danger">
+    <strong>Tem certeza que deseja excluir este serviço?</strong>
+</div>
+
+<dl class="row">
+
+    <dt class="col-sm-3">Nome</dt>
+    <dd class="col-sm-9">@Model.Nome</dd>
+
+    <dt class="col-sm-3">Descrição</dt>
+    <dd class="col-sm-9">@Model.Descricao</dd>
+
+    <dt class="col-sm-3">Categoria</dt>
+    <dd class="col-sm-9">@Model.Categoria</dd>
+
+    <dt class="col-sm-3">Valor</dt>
+    <dd class="col-sm-9">R$ @Model.Valor</dd>
+
+</dl>
+
+<form asp-action="Delete">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Excluir
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>
