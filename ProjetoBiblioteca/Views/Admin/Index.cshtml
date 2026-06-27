@@ -2,68 +2,54 @@
     ViewData["Title"] = "Painel Administrativo";
 }
 
-<div class="container mt-5">
+<div class="container mt-4">
 
-    <h2 class="mb-4">
-        Painel Administrativo
-    </h2>
+    <h2 class="mb-4">Painel Administrativo</h2>
 
-    <div class="alert alert-success">
-        Bem-vindo à área administrativa da Biblioteca!
-    </div>
+    <p class="text-muted">
+        Bem-vindo à área administrativa da Biblioteca.
+    </p>
 
     <div class="row">
 
-        <div class="col-md-6 mb-3">
-
-            <div class="card shadow">
-
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
 
                     <h4>📚 Livros</h4>
 
-                    <p>
-                        Gerencie os livros cadastrados.
-                    </p>
+                    <h2>@ViewBag.TotalLivros</h2>
+
+                    <p>Livros cadastrados</p>
 
                     <a asp-controller="Livros"
                        asp-action="Index"
                        class="btn btn-primary">
-
                         Gerenciar Livros
-
                     </a>
 
                 </div>
-
             </div>
-
         </div>
 
-        <div class="col-md-6 mb-3">
-
-            <div class="card shadow">
-
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
 
                     <h4>🛠 Serviços</h4>
 
-                    <p>
-                        Gerencie os serviços cadastrados.
-                    </p>
+                    <h2>@ViewBag.TotalServicos</h2>
+
+                    <p>Serviços cadastrados</p>
 
                     <a asp-controller="Servicos"
                        asp-action="Index"
                        class="btn btn-primary">
-
                         Gerenciar Serviços
-
                     </a>
 
                 </div>
-
             </div>
-
         </div>
 
     </div>
