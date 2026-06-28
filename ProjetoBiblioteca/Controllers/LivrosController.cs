@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProjetoBiblioteca.Controllers
 {
-    [Authorize]
+
     public class LivrosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -33,6 +33,7 @@ namespace ProjetoBiblioteca.Controllers
             return View(await livros.ToListAsync());
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -40,6 +41,7 @@ namespace ProjetoBiblioteca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(Livro livro)
         {
             if (ModelState.IsValid)
@@ -54,6 +56,7 @@ namespace ProjetoBiblioteca.Controllers
             return View(livro);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,6 +76,7 @@ namespace ProjetoBiblioteca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, Livro livro)
         {
             if (id != livro.Id)
@@ -91,6 +95,7 @@ namespace ProjetoBiblioteca.Controllers
             return View(livro);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,6 +115,7 @@ namespace ProjetoBiblioteca.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var livro = await _context.Livros.FindAsync(id);
