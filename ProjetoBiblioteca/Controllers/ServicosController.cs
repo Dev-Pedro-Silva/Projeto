@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProjetoBiblioteca.Controllers
 {
-    
+
     public class ServicosController : Controller
     {
 
@@ -21,7 +21,7 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult> Index(string pesquisa)
         {
             var servicos = from s in _context.Servicos
-                         select s;
+                           select s;
 
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
@@ -129,6 +129,20 @@ namespace ProjetoBiblioteca.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var servico = await _context.Servicos
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (servico == null)
+                return NotFound();
+
+            return View(servico);
         }
 
     }
