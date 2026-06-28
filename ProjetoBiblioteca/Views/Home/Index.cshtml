@@ -1,44 +1,131 @@
-﻿<div class="text-center mt-5">
-    <h1 class="display-4">BiblioNuvem</h1>
+﻿@model List<ProjetoBiblioteca.Models.Livro>
 
-    <p class="lead">
-        Seu portal para conhecimento, leitura e aprendizado.
-    </p>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+    <div class="container py-4">
+
+        <h1 class="display-4">📚 Biblioteca Digital</h1>
+
+        <p class="lead">
+            Seu portal para consulta de livros e serviços da biblioteca.
+        </p>
+
+        <a asp-controller="Livros" asp-action="Index" class="btn btn-primary btn-lg me-2">
+            Ver Livros
+        </a>
+
+        <a asp-controller="Servicos" asp-action="Index" class="btn btn-outline-primary btn-lg">
+            Ver Serviços
+        </a>
+
+    </div>
 </div>
 
-<div class="row mt-5">
+<div class="row">
 
-    <div class="col-md-4">
-        <div class="card h-100">
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow-sm h-100">
+
             <div class="card-body">
-                <h3>📚 Livros</h3>
+
+                <h3>📚 Acervo</h3>
+
                 <p>
-                    Explore nosso catálogo de livros para estudo e lazer.
+                    Consulte todos os livros cadastrados em nossa biblioteca.
                 </p>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="col-md-4">
-        <div class="card h-100">
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow-sm h-100">
+
             <div class="card-body">
-                <h3>🛠️ Serviços</h3>
+
+                <h3>🛠 Serviços</h3>
+
                 <p>
-                    Consulte os serviços disponíveis para nossos usuários.
+                    Conheça todos os serviços oferecidos pela biblioteca.
                 </p>
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="col-md-4">
-        <div class="card h-100">
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow-sm h-100">
+
             <div class="card-body">
-                <h3>📩 Contato</h3>
+
+                <h3>🔒 Administração</h3>
+
                 <p>
-                    Entre em contato conosco para tirar dúvidas.
+                    Área exclusiva para gerenciamento do sistema.
                 </p>
+
             </div>
+
         </div>
+
     </div>
 
 </div>
+
+<hr class="my-5" />
+
+<h2 class="mb-4">Últimos livros cadastrados</h2>
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        @foreach (var livro in Model)
+        {
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h5>@livro.Titulo</h5>
+
+                        <p class="text-muted">
+
+                            @livro.Autor
+
+                        </p>
+
+                        <p class="mb-2">
+                            <strong>Categoria:</strong> @livro.Categoria
+                        </p>
+
+                        <p class="text-primary fw-bold">
+                            R$ @livro.Preco.ToString("N2")
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        Nenhum livro cadastrado até o momento.
+    </div>
+}
