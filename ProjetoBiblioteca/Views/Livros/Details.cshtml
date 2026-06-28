@@ -10,9 +10,7 @@
 
         <div class="col-md-4">
 
-            <img src="@Model.ImagemUrl"
-                 class="img-fluid rounded shadow"
-                 alt="@Model.Titulo">
+            <img src="@Model.ImagemUrl" class="img-fluid rounded shadow" alt="@Model.Titulo">
 
         </div>
 
@@ -30,10 +28,22 @@
                 @Model.Categoria
             </p>
 
-            <p>
-                <strong>Preço:</strong>
-                R$ @Model.Preco.ToString("N2")
-            </p>
+            @if (Model.Disponivel)
+            {
+                <span class="badge bg-success">
+
+                    Disponível
+
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-danger">
+
+                    Indisponível
+
+                </span>
+            }
 
             <hr />
 
@@ -43,8 +53,7 @@
                 @Model.Descricao
             </p>
 
-            <a asp-action="Index"
-               class="btn btn-secondary">
+            <a asp-action="Index" class="btn btn-secondary">
                 Voltar
             </a>
 

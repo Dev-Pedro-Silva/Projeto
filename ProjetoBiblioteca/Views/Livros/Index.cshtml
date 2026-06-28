@@ -65,8 +65,8 @@ else
             <div class="card h-100 shadow-sm">
 
                 <img src="@(string.IsNullOrWhiteSpace(item.ImagemUrl)
-                                                                   ? "https://placehold.co/400x600?text=Sem+Imagem"
-                                                                   : item.ImagemUrl)" class="card-img-top"
+                                                                                        ? "https://placehold.co/400x600?text=Sem+Imagem"
+                                                                                        : item.ImagemUrl)" class="card-img-top"
                      style="height:300px; object-fit:cover;" alt="@item.Titulo">
 
                 <div class="card-body">
@@ -99,11 +99,22 @@ else
 
                     </p>
 
-                    <p class="fw-bold text-success">
+                    @if (item.Disponivel)
+                    {
+                        <p class="text-success fw-bold">
 
-                        R$ @item.Preco.ToString("N2")
+                            🟢 Disponível
 
-                    </p>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-danger fw-bold">
+
+                            🔴 Indisponível
+
+                        </p>
+                    }
 
                 </div>
 

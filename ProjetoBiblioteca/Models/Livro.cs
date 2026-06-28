@@ -13,15 +13,14 @@ namespace ProjetoBiblioteca.Models
         public string Autor { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "A categoria é obrigatória.")]
-        public string Categoria { get; set; } = string.Empty;
+        public string Categoria { get; set; } = string.Empty;        
 
-        [Required(ErrorMessage = "O preço é obrigatório.")]
-        public decimal Preco { get; set; }
-
-        //[Required(ErrorMessage = "A imagem é obrigatória.")]
+        [Required(ErrorMessage = "A imagem é obrigatória.")]
         public string ImagemUrl { get; set; } = string.Empty;
 
-        //[Required(ErrorMessage = "A descrição é obrigatória.")]
+        [Required(ErrorMessage = "A descrição é obrigatória.")]
         public string Descricao { get; set; } = string.Empty;
+
+        public bool Disponivel { get; set; } = true;
     }
 }
