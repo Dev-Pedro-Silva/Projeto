@@ -4,97 +4,69 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
-    <div class="container py-4">
+<div class="p-5 mb-5 bg-light rounded-4 shadow">
 
-        <h1 class="display-4">📚 Biblioteca Digital</h1>
+    <div class="text-center">
+
+        <h1 class="display-4 mb-3">
+            📚 Biblioteca Digital
+        </h1>
 
         <p class="lead">
-            Seu portal para consulta de livros e serviços da biblioteca.
+            Bem-vindo à Biblioteca Digital! Nossa plataforma foi desenvolvida para facilitar
+            a consulta ao acervo de livros e aos serviços oferecidos pela biblioteca,
+            proporcionando uma experiência simples, organizada e intuitiva.
         </p>
 
-        <a asp-controller="Livros" asp-action="Index" class="btn btn-primary btn-lg me-2">
-            Ver Livros
+        <hr class="my-4"/>
+
+        <p>
+            Explore nosso catálogo, conheça os serviços disponíveis e descubra
+            um ambiente pensado para incentivar o acesso ao conhecimento.
+        </p>
+
+        <a asp-controller="Livros"
+           asp-action="Index"
+           class="btn btn-primary btn-lg me-3">
+
+            📚 Ver Livros
+
         </a>
 
-        <a asp-controller="Servicos" asp-action="Index" class="btn btn-outline-primary btn-lg">
-            Ver Serviços
+        <a asp-controller="Servicos"
+           asp-action="Index"
+           class="btn btn-outline-primary btn-lg">
+
+            🛠 Ver Serviços
+
         </a>
-
-    </div>
-</div>
-
-<div class="row">
-
-    <div class="col-md-4 mb-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h3>📚 Acervo</h3>
-
-                <p>
-                    Consulte todos os livros cadastrados em nossa biblioteca.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4 mb-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h3>🛠 Serviços</h3>
-
-                <p>
-                    Conheça todos os serviços oferecidos pela biblioteca.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4 mb-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h3>🔒 Administração</h3>
-
-                <p>
-                    Área exclusiva para gerenciamento do sistema.
-                </p>
-
-            </div>
-
-        </div>
 
     </div>
 
 </div>
 
-<hr class="my-5" />
+<h2 class="mb-4">
 
-<h2 class="mb-4">Últimos livros cadastrados</h2>
+    Últimos livros cadastrados
 
-@if (Model.Any())
+</h2>
+
+@if(Model.Any())
 {
     <div class="row">
 
-        @foreach (var livro in Model)
+        @foreach(var livro in Model)
         {
-            <div class="col-md-4 mb-3">
+            <div class="col-lg-4 mb-4">
 
                 <div class="card shadow-sm h-100">
+
+                    <img src="@(string.IsNullOrWhiteSpace(livro.ImagemUrl)
+                        ? "https://placehold.co/400x600?text=Sem+Capa"
+                        : livro.ImagemUrl)"
+                         class="card-img-top"
+                         style="height:320px; object-fit:cover;"
+                         alt="@livro.Titulo"/>
 
                     <div class="card-body">
 
@@ -106,13 +78,34 @@
 
                         </p>
 
-                        <p class="mb-2">
-                            <strong>Categoria:</strong> @livro.Categoria
+                        <span class="badge bg-primary">
+
+                            @livro.Categoria
+
+                        </span>
+
+                        <hr>
+
+                        <p>
+
+                            @(livro.Descricao.Length > 120
+                                ? livro.Descricao.Substring(0,120) + "..."
+                                : livro.Descricao)
+
                         </p>
 
-                        <p class="text-primary fw-bold">
-                            R$ @livro.Preco.ToString("N2")
-                        </p>
+                    </div>
+
+                    <div class="card-footer bg-white">
+
+                        <a asp-controller="Livros"
+                           asp-action="Details"
+                           asp-route-id="@livro.Id"
+                           class="btn btn-outline-primary w-100">
+
+                            Ver detalhes
+
+                        </a>
 
                     </div>
 
@@ -126,6 +119,8 @@
 else
 {
     <div class="alert alert-info">
-        Nenhum livro cadastrado até o momento.
+
+        Ainda não existem livros cadastrados.
+
     </div>
 }
