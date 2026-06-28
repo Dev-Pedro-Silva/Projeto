@@ -34,7 +34,8 @@ else
 
     <div class="input-group">
 
-        <input type="text" name="pesquisa" class="form-control" placeholder="Pesquisar livro..." />
+        <input type="text" name="pesquisa" class="form-control form-control-lg"
+               placeholder="🔍 Pesquisar por título ou autor..." />
 
         <button class="btn btn-primary" type="submit">
 
@@ -43,6 +44,15 @@ else
         </button>
 
     </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+
+            Nenhum livro encontrado.
+
+        </div>
+    }
 
 </form>
 
@@ -55,8 +65,9 @@ else
             <div class="card h-100 shadow-sm">
 
                 <img src="@(string.IsNullOrWhiteSpace(item.ImagemUrl)
-                         ? "https://placehold.co/400x600?text=Sem+Imagem"
-                         : item.ImagemUrl)" class="card-img-top" style="height:300px; object-fit:cover;" alt="@item.Titulo">
+                                                                   ? "https://placehold.co/400x600?text=Sem+Imagem"
+                                                                   : item.ImagemUrl)" class="card-img-top"
+                     style="height:300px; object-fit:cover;" alt="@item.Titulo">
 
                 <div class="card-body">
 
