@@ -18,5 +18,8 @@ namespace ProjetoBiblioteca.Models
         [Required(ErrorMessage = "O valor é obrigatório.")]
         [Range(0, 9999.99, ErrorMessage = "Informe um valor válido.")]
         public decimal Valor { get; set; }
+
+        [Required(ErrorMessage = "A imagem é obrigatória.")]
+        public string ImagemUrl { get; set; } = string.Empty;
     }
 }

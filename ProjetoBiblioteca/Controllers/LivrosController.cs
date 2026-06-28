@@ -128,5 +128,19 @@ namespace ProjetoBiblioteca.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var livro = await _context.Livros
+                .FirstOrDefaultAsync(l => l.Id == id);
+
+            if (livro == null)
+                return NotFound();
+
+            return View(livro);
+        }
     }
 }
