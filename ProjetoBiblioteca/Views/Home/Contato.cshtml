@@ -1,5 +1,119 @@
-<h1>Contato</h1>
+@{
+    ViewData["Title"] = "Contato";
+}
 
-<p>E-mail: pedro.oliveira9175@sounidesc.com.br</p>
-<p>Telefone: 61 9XXXX-XXXX</p>
-<p>GitHub: <a href="https://github.com/Dev-Pedro-Silva" target="_blank">Dev-Pedro-Silva</a></p>
+<div class="container mt-4">
+
+    <div class="text-center mb-5">
+        <h1 class="display-5">📞 Entre em Contato</h1>
+        <p class="lead">
+            Ficou com alguma dúvida? Entre em contato pelos canais abaixo.
+        </p>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-5 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h3>Informações</h3>
+
+                    <hr>
+
+                    <p>
+                        <strong>📧 E-mail</strong><br />
+                        pedro.oliveira9175@sounidesc.com.br
+                    </p>
+
+                    <p>
+                        <strong>📱 Telefone</strong><br />
+                        (61) 99285-2845
+                    </p>
+
+                    <p>
+                        <strong>📍 Endereço</strong><br />
+                        Valparaíso de Goiás - GO
+                    </p>
+
+                    <p>
+                        <strong>💻 GitHub</strong><br />
+                        github.com/Dev-Pedro-Silva
+                    </p>
+
+                    <hr>
+
+                    <h5>🕒 Horário de Atendimento</h5>
+
+                    <p>
+                        Segunda à Sexta<br />
+                        08:00 às 18:00
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-7">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body">
+
+                    <h3>Envie uma Mensagem</h3>
+
+                    <hr>
+
+                    <form>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">Nome</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Digite seu nome">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">E-mail</label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Digite seu e-mail">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">Mensagem</label>
+
+                            <textarea class="form-control"
+                                      rows="6"
+                                      placeholder="Digite sua mensagem"></textarea>
+
+                        </div>
+
+                        <button class="btn btn-primary" type="button">
+
+                            Enviar Mensagem
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
