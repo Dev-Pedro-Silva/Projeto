@@ -42,10 +42,50 @@ namespace ProjetoBiblioteca.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(Livro livro)
+        public async Task<IActionResult> Create(Livro livro, IFormFile? imagem)
         {
+            foreach (var item in ModelState)
+            {
+                foreach (var erro in item.Value.Errors)
+                {
+                    Console.WriteLine($"{item.Key}: {erro.ErrorMessage}");
+                }
+            }
             if (ModelState.IsValid)
             {
+                if (imagem != null && imagem.Length > 0)
+                {
+                    var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+
+                    var extensao = Path.GetExtension(imagem.FileName).ToLower();
+
+                    if (!extensoesPermitidas.Contains(extensao))
+                    {
+                        ModelState.AddModelError("", "Formato de imagem inválido.");
+                        return View(livro);
+                    }
+
+                    var pasta = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot/images/livros");
+
+                    if (!Directory.Exists(pasta))
+                    {
+                        Directory.CreateDirectory(pasta);
+                    }
+
+                    var nomeArquivo = Guid.NewGuid().ToString() + extensao;
+
+                    var caminho = Path.Combine(pasta, nomeArquivo);
+
+                    using (var stream = new FileStream(caminho, FileMode.Create))
+                    {
+                        await imagem.CopyToAsync(stream);
+                    }
+
+                    livro.ImagemUrl = "/images/livros/" + nomeArquivo;
+                }
+
                 _context.Add(livro);
 
                 await _context.SaveChangesAsync();
@@ -77,7 +117,7 @@ namespace ProjetoBiblioteca.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, Livro livro)
+        public async Task<IActionResult> Edit(int id, Livro livro, IFormFile? imagem)
         {
             if (id != livro.Id)
             {
@@ -86,7 +126,65 @@ namespace ProjetoBiblioteca.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Update(livro);
+                var livroBanco = await _context.Livros.FindAsync(id);
+
+                if (livroBanco == null)
+                {
+                    return NotFound();
+                }
+
+                livroBanco.Titulo = livro.Titulo;
+                livroBanco.Autor = livro.Autor;
+                livroBanco.Categoria = livro.Categoria;
+                livroBanco.Descricao = livro.Descricao;
+                livroBanco.Disponivel = livro.Disponivel;
+
+                if (imagem != null && imagem.Length > 0)
+                {
+                    var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+
+                    var extensao = Path.GetExtension(imagem.FileName).ToLower();
+
+                    if (!extensoesPermitidas.Contains(extensao))
+                    {
+                        ModelState.AddModelError("", "Formato de imagem inválido.");
+                        return View(livro);
+                    }
+
+                    if (!string.IsNullOrEmpty(livroBanco.ImagemUrl))
+                    {
+                        var imagemAntiga = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot",
+                            livroBanco.ImagemUrl.TrimStart('/'));
+
+                        if (System.IO.File.Exists(imagemAntiga))
+                        {
+                            System.IO.File.Delete(imagemAntiga);
+                        }
+                    }
+
+                    var pasta = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot/images/livros");
+
+                    if (!Directory.Exists(pasta))
+                    {
+                        Directory.CreateDirectory(pasta);
+                    }
+
+                    var nomeArquivo = Guid.NewGuid().ToString() + extensao;
+
+                    var caminho = Path.Combine(pasta, nomeArquivo);
+
+                    using (var stream = new FileStream(caminho, FileMode.Create))
+                    {
+                        await imagem.CopyToAsync(stream);
+                    }
+
+                    livroBanco.ImagemUrl = "/images/livros/" + nomeArquivo;
+                }
+
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -122,7 +220,21 @@ namespace ProjetoBiblioteca.Controllers
 
             if (livro != null)
             {
+                if (!string.IsNullOrEmpty(livro.ImagemUrl))
+                {
+                    var caminhoImagem = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        livro.ImagemUrl.TrimStart('/'));
+
+                    if (System.IO.File.Exists(caminhoImagem))
+                    {
+                        System.IO.File.Delete(caminhoImagem);
+                    }
+                }
+
                 _context.Livros.Remove(livro);
+
                 await _context.SaveChangesAsync();
             }
 

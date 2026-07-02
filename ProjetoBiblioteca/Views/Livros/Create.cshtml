@@ -6,7 +6,7 @@
 
 <h2>Cadastrar Livro</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
 
     <div class="mb-3">
         <label asp-for="Titulo" class="form-label"></label>
@@ -26,11 +26,37 @@
         <span asp-validation-for="Categoria" class="text-danger"></span>
     </div>
 
+    <div class="mb-3">
+        <label asp-for="Descricao" class="form-label"></label>
+
+        <textarea asp-for="Descricao"
+                  class="form-control"
+                  rows="5"></textarea>
+
+        <span asp-validation-for="Descricao"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Capa do Livro
+        </label>
+
+        <input type="file"
+               name="imagem"
+               class="form-control"
+               accept=".jpg,.jpeg,.png,.webp" />
+
+    </div>
+
     <div class="form-check mb-3">
 
-        <input asp-for="Disponivel" class="form-check-input" />
+        <input asp-for="Disponivel"
+               class="form-check-input" />
 
-        <label asp-for="Disponivel" class="form-check-label">
+        <label asp-for="Disponivel"
+               class="form-check-label">
 
             Livro disponível para empréstimo
 
@@ -48,7 +74,7 @@
 
 </form>
 
-@section Scripts {
+@section Scripts{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
