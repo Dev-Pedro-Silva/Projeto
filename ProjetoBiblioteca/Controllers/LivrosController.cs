@@ -142,5 +142,43 @@ namespace ProjetoBiblioteca.Controllers
 
             return View(livro);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Emprestar(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var livro = await _context.Livros.FindAsync(id);
+
+            if (livro == null)
+                return NotFound();
+
+            return View(livro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Emprestar(int id)
+        {
+            var livro = await _context.Livros.FindAsync(id);
+
+            if (livro == null)
+                return NotFound();
+
+            if (!livro.Disponivel)
+            {
+                TempData["Erro"] = "Este livro já está indisponível.";
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            livro.Disponivel = false;
+
+            await _context.SaveChangesAsync();
+
+            TempData["Sucesso"] = "Empréstimo solicitado com sucesso!";
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
     }
 }

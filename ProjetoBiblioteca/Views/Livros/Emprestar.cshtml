@@ -1,0 +1,60 @@
+@model ProjetoBiblioteca.Models.Livro
+
+@{
+    ViewData["Title"] = "Solicitar Empréstimo";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body text-center">
+
+            <h2>Solicitar Empréstimo</h2>
+
+            <hr />
+
+            <p>
+
+                Deseja realmente solicitar o empréstimo do livro:
+
+            </p>
+
+            <h3>
+
+                @Model.Titulo
+
+            </h3>
+
+            <p>
+
+                <strong>Autor:</strong> @Model.Autor
+
+            </p>
+
+            <form asp-action="Emprestar" method="post">
+
+                <input type="hidden"
+                       asp-for="Id"/>
+
+                <button class="btn btn-success">
+
+                    Confirmar Empréstimo
+
+                </button>
+
+                <a asp-action="Details"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-secondary">
+
+                    Cancelar
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
