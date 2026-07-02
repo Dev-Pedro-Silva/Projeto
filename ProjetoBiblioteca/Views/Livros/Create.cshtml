@@ -29,12 +29,9 @@
     <div class="mb-3">
         <label asp-for="Descricao" class="form-label"></label>
 
-        <textarea asp-for="Descricao"
-                  class="form-control"
-                  rows="5"></textarea>
+        <textarea asp-for="Descricao" class="form-control" rows="5"></textarea>
 
-        <span asp-validation-for="Descricao"
-              class="text-danger"></span>
+        <span asp-validation-for="Descricao" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -43,20 +40,19 @@
             Capa do Livro
         </label>
 
-        <input type="file"
-               name="imagem"
-               class="form-control"
-               accept=".jpg,.jpeg,.png,.webp" />
+        <input type="file" name="imagem" class="form-control" accept=".jpg,.jpeg,.png,.webp" />
+
+        <small class="text-muted">
+            Formatos permitidos: JPG, JPEG, PNG e WEBP.
+        </small>
 
     </div>
 
     <div class="form-check mb-3">
 
-        <input asp-for="Disponivel"
-               class="form-check-input" />
+        <input asp-for="Disponivel" class="form-check-input" />
 
-        <label asp-for="Disponivel"
-               class="form-check-label">
+        <label asp-for="Disponivel" class="form-check-label">
 
             Livro disponível para empréstimo
 
@@ -64,7 +60,7 @@
 
     </div>
 
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success me-2">
         Cadastrar
     </button>
 
@@ -74,7 +70,7 @@
 
 </form>
 
-@section Scripts{
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

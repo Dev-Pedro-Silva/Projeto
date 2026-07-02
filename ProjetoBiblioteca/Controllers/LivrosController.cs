@@ -44,15 +44,12 @@ namespace ProjetoBiblioteca.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Livro livro, IFormFile? imagem)
         {
-            foreach (var item in ModelState)
-            {
-                foreach (var erro in item.Value.Errors)
-                {
-                    Console.WriteLine($"{item.Key}: {erro.ErrorMessage}");
-                }
-            }
             if (ModelState.IsValid)
             {
+                if (imagem == null || imagem.Length == 0)
+                {
+                    ModelState.AddModelError("", "Selecione uma imagem para o livro.");
+                }
                 if (imagem != null && imagem.Length > 0)
                 {
                     var extensoesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".webp" };
